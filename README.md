@@ -23,15 +23,15 @@
  
 <h4>Read data from firebase real-time database </h4>
 <h5> Add value event listener for read data from firebase </h5>
-<p>  
-  
-  val userDetailsRes = object : ValueEventListener {
-            override fun onDataChange(snapshot: DataSnapshot) {
-            
-  }
-   override fun onCancelled(error: DatabaseError) {
-                Log.e("FirebaseError", "Error: ${error.message}")
-            }         
+<p>
+val userDetailsRes = object : ValueEventListener {\n
+    override fun onDataChange(snapshot: DataSnapshot) {\n
+        \n
+    }\n
+    override fun onCancelled(error: DatabaseError) {\n
+        Log.e("FirebaseError", "Error: ${error.message}")\n
+    }\n
+}
 </p>
 
 <p> database.child("Users").addValueEventListener(userDetailsRes)</p>
