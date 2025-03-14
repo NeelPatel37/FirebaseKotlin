@@ -1,47 +1,48 @@
-<h2> Firebase </h2>
+<h2>Firebase</h2>
 
-<h4> Add Firebase Dependency </h4>
+<h4>Add Firebase Dependency</h4>
 
-<h4> Project Levet Build gradle File </h4>
+<h4>Project Level Build Gradle File</h4>
+<pre>
+id("com.google.gms.google-services") version "4.4.2" apply false
+</pre>
 
-<p> id("com.google.gms.google-services") version "4.4.2" apply false </p>
+<h4>Root Level Build Gradle File</h4>
+<pre>
+implementation(platform("com.google.firebase:firebase-bom:33.10.0"))
+implementation("com.google.firebase:firebase-analytics")
+</pre>
 
-<h4> Root Levet Build gradle File </h4>
+<h4>Real-Time Database Dependency</h4>
+<pre>
+implementation("com.google.firebase:firebase-database")
+</pre>
 
-<p>implementation(platform("com.google.firebase:firebase-bom:33.10.0"))</p>
-<p>implementation("com.google.firebase:firebase-analytics")</p>
+<h4>Create Firebase Database Reference</h4>
+<pre>
+private lateinit var database: DatabaseReference
 
-<h4> Real Time database dependency </h4>
-<p>implementation("com.google.firebase:firebase-database")</p>
+database = Firebase.database.reference
+</pre>
 
-<h4> Create firebase database reference </h4>
-<p> private lateinit var database: DatabaseReference </p>
-<p> database = Firebase.database.reference </p>
+<h4>Write Data into Firebase</h4>
+<pre>
+database.child("Users").push().setValue(user)
+</pre>
 
-<h4> Write data into firebase </h4>
-<p> database.child("Users").push().setValue(user) </p>
- 
-<h4>Read data from firebase real-time database </h4>
-<h5> Add value event listener for read data from firebase </h5>
-<p>
-val userDetailsRes = object : ValueEventListener {\n
-    override fun onDataChange(snapshot: DataSnapshot) {\n
-        \n
-    }\n
-    override fun onCancelled(error: DatabaseError) {\n
-        Log.e("FirebaseError", "Error: ${error.message}")\n
-    }\n
+<h4>Read Data from Firebase Real-Time Database</h4>
+
+<h5>Add ValueEventListener to Read Data from Firebase</h5>
+<pre>
+val userDetailsRes = object : ValueEventListener {
+    override fun onDataChange(snapshot: DataSnapshot) {
+        // Handle data here
+    }
+    
+    override fun onCancelled(error: DatabaseError) {
+        Log.e("FirebaseError", "Error: ${error.message}")
+    }
 }
-</p>
 
-<p> database.child("Users").addValueEventListener(userDetailsRes)</p>
-
-
-
-
-
-
-
-
-
-
+database.child("Users").addValueEventListener(userDetailsRes)
+</pre>
